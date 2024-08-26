@@ -14,14 +14,15 @@ export const userResolvers = {
         },
     },
     Mutation: {
-        signUp: async (_: any, { username, email, password }: any, { User, bcrypt, jwt, environment }: any) => {
+        signUp: async (_: any, { username, email, password }: any, { User, bcrypt, jwt }: any) => {
             const hashedPassword = await bcrypt.hash(password, 10);
             const user = new User({ username, email, password: hashedPassword });
             await user.save();
             const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
             return { token, user };
         },
-        login: async (_: any, { email, password }: any, { User, bcrypt, jwt, environment }: any) => {
+        login: async (_: any, { email, password }: any, { User, bcrypt, jwt }: any) => {
+            console.log('heloo got it')
             const user = await User.findOne({ email });
             if (!user) throw new Error('User not found');
             const valid = await bcrypt.compare(password, user.password);

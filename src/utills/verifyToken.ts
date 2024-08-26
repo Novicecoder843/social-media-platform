@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import { User } from '../modules/user/user.model';
 
 const secretKey: any = process.env.JWT_SECRET
-console.log(secretKey, "secretkey")
+console.log(secretKey, "secretkey verify")
 
 const verifyToken = async (token: any) => {
     const decoded: any = await jwt.verify(token, secretKey);

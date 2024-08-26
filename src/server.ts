@@ -8,7 +8,7 @@ import { resolvers } from "./graphql/resolvers";
 import dotenv from 'dotenv'
 import { connectDB } from './config/db';
 import {startApolloServer, gqlServer} from "./graphql/apolloServer";
-
+import auth_middleware from './middelware/auth';
 dotenv.config();
 
 const schema = makeExecutableSchema({
@@ -27,7 +27,6 @@ export const startServer = async () => {
     app.use(cors())
 
     // await gqlServer.start()
-
     app.use('/graphql', cors(), express.json(), expressMiddleware(gqlServer));
 
     app.use('/graphiql', graphqlHTTP({

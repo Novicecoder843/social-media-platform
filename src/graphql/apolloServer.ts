@@ -4,7 +4,7 @@ import  {typeDefs} from './typeDefs';
 import { resolvers } from './resolvers';
 import { error } from 'console';
 import verifyToken from '../utills/verifyToken'
-
+// import auth_middleware from './middelware/auth';
 interface MyContext {
     user?: {
         id: string;

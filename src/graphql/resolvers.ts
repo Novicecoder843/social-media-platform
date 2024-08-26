@@ -19,7 +19,9 @@ export const resolvers = {
             return User.find({ username: new RegExp(query, 'i') });
         },
         getCurrentUser: async (_: any, __: any, { req }: any) => {
-            if (!req.userId) throw new Error('Not authenticated');
+            console.log('userid')
+            if (!req?.userId) throw new Error('Not authenticated');
+            console.log(req.userId,'userid')
             return User.findById(req.userId);
         },
         getPost: async (_: any, { id }: any) => {
@@ -55,12 +57,13 @@ export const resolvers = {
 
         },
         login: async (_: any, { email, password }: any) => {
+            console.log('hello got it')
             const user = await User.findOne({ email });
             if (!user) throw new Error('User not found');
             const valid = await bcrypt.compare(password, user.password);
             if (!valid) throw new Error('Incorrect password');
             const token = await jwt.sign(
-                { userId: user.id }, "dddddddd",{expiresIn: '2000m'});
+                { userId: user.id }, `${JWT_SECRET}`,{expiresIn: '2000m'});
                 return { token, user };
         },
         followUser: async (_: any, { userId }: any, { req }: any) => {
