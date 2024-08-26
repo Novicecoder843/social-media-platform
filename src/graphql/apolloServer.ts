@@ -20,12 +20,13 @@ const gqlServer = new ApolloServer({
 
 const startApolloServer = async () => {
     const { url } = await startStandaloneServer(gqlServer, {
-        listen: { port: 6000},
+        listen: { port: 4000},
         context: async ({ req }: any) => {
             const token = req.headers.authorization;
 
             if(token){
                 const user = await verifyToken(token);
+                console.log(user)
                 return { user }
             }
 
