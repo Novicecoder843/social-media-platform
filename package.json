@@ -4,8 +4,8 @@
   "description": "Social Media App with GraphQL",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config src/cluster.ts",
-    "start": "nodemon -r dotenv/config src/cluster.ts",
+    "dev": "nodemon -r dotenv/config src/server.ts",
+    "start": "nodemon -r dotenv/config src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
